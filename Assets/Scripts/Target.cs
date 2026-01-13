@@ -26,24 +26,23 @@ public class Target : MonoBehaviour
     {
         return Vector3.up * Random.Range(minSpeed, maxSpeed);
     }
-
     float RandomTorque()
     {
         return Random.Range(-maxTorque, maxSpeed);
     }
-
     Vector3 RandomSpawnPos()
     {
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
-
     private void OnMouseDown()
     {
+        Debug.Log("Mouse");
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("enter");
         Destroy(gameObject);
     }
 }
