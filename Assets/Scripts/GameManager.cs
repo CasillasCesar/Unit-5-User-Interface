@@ -1,11 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-//Add a new using Directive to the list of namespaces at the top of your script:
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    // Add a new public list
+    private float spawnRate = 1.0f;
     public List<GameObject> targets;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,5 +17,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator SpawnTarget()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnRate);
+            int index = Random.Range(0, targets.Count);
+            Instantiate(targets[index]);
+        }
     }
 }
