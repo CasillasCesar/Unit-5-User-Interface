@@ -2,22 +2,38 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    private float minSpeed = 12;
+    private float maxSpeed = 16;
+    private float maxTorque = 10;
+    private float xRange = 4;
+    private float ySpawnPos = -6;
 
     private Rigidbody targetRb;
     void Start()
     {
         targetRb = GetComponent<Rigidbody>();
-        // Add an upward force multiplied by a randomized speed
-        targetRb.AddForce(Vector3.up * Random.Range(12,16), ForceMode.Impulse);
-        // Add a torque with randomized xyz values
-        targetRb.AddTorque(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10), ForceMode.Impulse);
-        // Set the position with a randomized X value
-        transform.position = new Vector3(Random.Range(-4,4), -6);
+        targetRb.AddForce(RandomForce(), ForceMode.Impulse);
+        targetRb.AddTorque(RandomTorque(), ForceMode.Impulse);
+        transform.position = RandomSpawnPos();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    Vector3 RandomForce()
+    {
+        return Vector3.up * Random.Range(minSpeed, maxSpeed);
+    }
+
+    float RandomTorque()
+    {
+        return Random.Range(-maxTorque, maxSpeed);
+    }
+
+    Vector3 RandomSpawnPos()
+    {
+        return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
 }
